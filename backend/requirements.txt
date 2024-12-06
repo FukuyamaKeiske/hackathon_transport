@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+asyncpg
+sqlalchemy[asyncio]
+alembic
+pydantic
+python-dotenv
+httpx
+websockets
+geoalchemy2
+python-jose
+pytz
+pytest
