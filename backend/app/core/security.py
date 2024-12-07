@@ -1,21 +1,22 @@
-from datetime import datetime, timedelta
-from jose import JWTError, jwt
-import pytz
+from jose import (
+    JWTError,
+    jwt
+)
+from typing import (
+    Dict,
+    Any
+)
 
-SECRET_KEY = "your_secret_key"
+from .config import Settings
+
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-def create_access_token(data: dict):
-    to_encode = data.copy()
-    expire = datetime.now(pytz.timezone("Europe/Moscow")) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    to_encode.update({"exp": expire.timestamp()})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
+def create_access_token(data: dict) -> str:
+    return jwt.encode(data.copy(), Settings.SECRET_KEY, algorithm=ALGORITHM)
 
-def verify_token(token: str):
+def verify_token(token: str) -> Dict[str, Any]:
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, Settings.SECRET_KEY, algorithms=[ALGORITHM])
         return payload
     except JWTError:
-        return None
+        return

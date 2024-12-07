@@ -12,6 +12,7 @@ python-jose
 pytz
 beautifulsoup4
 pydantic-settings
+pydantic[email]
 pytest
 pytest-mock
 pytest-asyncio

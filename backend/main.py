@@ -12,7 +12,9 @@ from app.api.endpoints import (
     social_reports,
     notifications,
     environmental_impact,
-    achievements
+    achievements,
+    sign_up,
+    sign_in
 )
 from app.db.session import get_db
 from app.services.traffic_light_initializer import initialize_traffic_lights
@@ -33,6 +35,8 @@ async def root():
     return {"message": "Welcome to the Traffic Management System API"}
 
 # Подключение маршрутов
+app.include_router(sign_up.router, prefix="/api/v1/sign-up", tags=["Sign Up"])
+app.include_router(sign_in.router, prefix="/api/v1/sign-in", tags=["Sign In"])
 app.include_router(traffic_analysis.router, prefix="/api/v1/traffic-analysis", tags=["Traffic Analysis"])
 app.include_router(incidents.router, prefix="/api/v1/incidents", tags=["Incidents"])
 app.include_router(cameras.router, prefix="/api/v1/cameras", tags=["Cameras"])
@@ -49,7 +53,7 @@ app.include_router(achievements.router, prefix="/api/v1/achievements", tags=["Ac
 
 @app.on_event("startup")
 async def startup_event():
-    async with get_db() as db:  # Получаем сессию базы данных
+    async for db in get_db():  # Получаем сессию базы данных
         await initialize_traffic_lights(db)  # Инициализируем светофоры
 
 
