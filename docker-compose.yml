@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: traffic_management
+      POSTGRES_USER: thrylos
+      POSTGRES_PASSWORD: igorekkot666
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - brige_network
+
+  backend:
+    build: ./backend
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    networks:
+      - brige_network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:8080"
+    networks:
+      - brige_network
+
+volumes:
+  postgres_data:
+
+networks:
+  brige_network:
+    external: true
