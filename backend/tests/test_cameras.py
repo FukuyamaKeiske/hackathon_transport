@@ -1,7 +1,8 @@
 import pytest
-from httpx import AsyncClient
-from fastapi import FastAPI
-from main import app
+from fastapi.testclient import TestClient
+from main import app  # Убедитесь, что импорт корректен
+
+client = TestClient(app)  # Создаём экземпляр TestClient
 
 @pytest.mark.asyncio
 async def test_list_cameras(mocker):
@@ -21,16 +22,16 @@ async def test_list_cameras(mocker):
         }
     ]
     
+    # Убедитесь, что путь к функции верный
     mocker.patch("app.services.camera_management.get_cameras_data", return_value=mock_cameras)
 
-    async with AsyncClient(app=app, base_url="http://test") as client:
-        response = await client.get("/api/v1/cameras/")
-        assert response.status_code == 200
-        assert len(response.json()) == 2
-        assert response.json()[0]["name"] == mock_cameras[0]["name"]
-        assert response.json()[0]["live_url"] == mock_cameras[0]["live_url"]
-        assert response.json()[0]["geo"] == mock_cameras[0]["geo"]
-        assert response.json()[0]["description"] == mock_cameras[0]["description"]
+    response = client.get("/api/v1/cameras/1")  # Используем TestClient для запроса
+    assert response.status_code == 200
+    assert len(response.json()) == 2
+    assert response.json()[0]["name"] == mock_cameras[0]["name"]
+    assert response.json()[0]["live_url"] == mock_cameras[0]["live_url"]
+    assert response.json()[0]["geo"] == mock_cameras[0]["geo"]
+    assert response.json()[0]["description"] == mock_cameras[0]["description"]
 
 @pytest.mark.asyncio
 async def test_live_url_parsing(mocker):

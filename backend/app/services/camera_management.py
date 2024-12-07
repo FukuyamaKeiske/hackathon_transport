@@ -42,6 +42,6 @@ async def get_live_url(camera_page_url: str) -> str:
         # Ищем тег <iframe> для получения ссылки на трансляцию
         iframe = soup.find('iframe')
         if iframe and 'src' in iframe.attrs:
-            return iframe['src']  # Возвращаем ссылку на трансляцию
+            return iframe['src'] if not ".jpg" in iframe['src'] else ""  # Возвращаем ссылку на трансляцию
 
     return ""  # Возвращаем пустую строку, если трансляция не найдена

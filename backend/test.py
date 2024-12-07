@@ -1,3 +1,4 @@
+import json
 import httpx
 
 async def fetch_cameras(page):
@@ -10,4 +11,4 @@ async def fetch_cameras(page):
 
 import asyncio
 cameras = asyncio.run(fetch_cameras(input("page >>> ")))
-print(cameras)
+print(json.dumps(cameras, indent=4, ensure_ascii=False))

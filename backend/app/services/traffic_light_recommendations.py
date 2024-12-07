@@ -2,17 +2,24 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.models.traffic_lights import TrafficLight
 
 async def recommend_traffic_lights(db: AsyncSession):
-    # Логика для получения рекомендаций по светофорам
-    traffic_lights = await db.execute(TrafficLight.__table__.select())
+    # Получение всех светофоров
+    result = await db.execute(TrafficLight.__table__.select())
+    traffic_lights = result.scalars().all()
     recommendations = []
 
-    for light in traffic_lights.scalars().all():
-        # Пример логики для рекомендаций
-        recommended_state = "green" if light.current_state == "red" else "red"
+    for light in traffic_lights:
+        # Логика рекомендаций
+        if light.red_state_duration >= 90 and light.green_state_duration <= 40:
+            recommended_state = "Уменьшить время красного света"
+        elif light.green_state_duration <= 20 and light.red_state_duration >= 60:
+            recommended_state = "Увеличить время зелёного света"
+        else:
+            recommended_state = "Без изменений"
+
         recommendations.append({
             "id": light.id,
             "current_state": light.current_state,
-            "recommended_state": recommended_state
+            "recommended_action": recommended_state
         })
 
     return recommendations

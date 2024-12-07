@@ -14,7 +14,8 @@ from app.api.endpoints import (
     environmental_impact,
     achievements
 )
-from app.core.config import settings
+from app.db.session import get_db
+from app.services.traffic_light_initializer import initialize_traffic_lights
 
 app = FastAPI(title="Traffic Management System")
 
@@ -44,6 +45,13 @@ app.include_router(social_reports.router, prefix="/api/v1/social-reports", tags=
 app.include_router(notifications.router, prefix="/api/v1/notifications", tags=["Notifications"])
 app.include_router(environmental_impact.router, prefix="/api/v1/environmental-impact", tags=["Environmental Impact"])
 app.include_router(achievements.router, prefix="/api/v1/achievements", tags=["Achievements"])
+
+
+@app.on_event("startup")
+async def startup_event():
+    async with get_db() as db:  # Получаем сессию базы данных
+        await initialize_traffic_lights(db)  # Инициализируем светофоры
+
 
 if __name__ == "__main__":
     import uvicorn
