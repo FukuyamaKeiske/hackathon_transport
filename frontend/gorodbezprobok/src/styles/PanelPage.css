@@ -1,0 +1,112 @@
+@font-face {
+    font-family: Jost;
+    src: url(/fonts/Jost-Regular.ttf) format("truetype");
+}
+
+body {
+    background-color: #333333;
+    color: #FFF;
+    margin: 0;
+    height: 100%;
+    font-family: Jost;
+}
+
+.title-containers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 35px;
+}
+
+.panel-page-container {
+    border-radius: 24px;
+    background: #1F1F1F;
+    text-align: center;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    box-shadow: 0px 0px 25px 0px rgba(31, 31, 31, 0.25);
+}
+
+.panel-page-container__button {
+    display: flex;
+    width: 558px;
+    height: 90px;
+    color: #808080;
+    border-radius: 20px;
+    border: 3px solid #808080;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s ease-in-out all;
+}
+
+.panel-page-container__button > img {
+    width: 21px;
+    height: 21px;
+    margin-right: 3px;
+}
+
+.panel-page-container__button:hover {
+    background: #808080;
+    color: #FFFFFF;
+    box-shadow: 0px 0px 25px 7px rgba(128, 128, 128, 0.25);
+}
+
+.pagel-page-container__small-buttons {
+    display: flex;
+    align-content: center;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 25px;
+}
+
+#title-container {
+    align-content: center;
+    margin-right: 31px;
+    width: 194px;
+    height: 104px;
+}
+
+#menu-container {
+    width: 732px;
+    height: 104px;
+    align-content: center;
+    align-items: center;
+    display: flex;
+}
+
+#menu-container > img {
+    width: 287px;
+    height: 22px;
+    margin-right: 191px;
+    margin-left: 32px;
+}
+
+#functional-panel {
+    width: 974px;
+    height: 790px;
+    margin: auto;
+    padding-top: 43px;
+}
+
+#pair-buttons {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 43px;
+    margin-bottom: 16px;
+}
+
+#regular-button {
+    width: 431px;
+    height: 163px;
+}
+
+#small-button {
+    width: 202px;
+    height: 163px;
+}

@@ -1,0 +1,97 @@
+@font-face {
+    font-family: Jost;
+    src: url(/fonts/Jost-Regular.ttf) format("truetype");
+}
+
+body {
+    background-color: #333333;
+    color: #FFF;
+    margin: 0;
+    height: 100%;
+    font-family: Jost;
+}
+
+.title-containers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 33px;
+}
+
+.login-page-container {
+    border-radius: 24px;
+    background: #1F1F1F;
+    text-align: center;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    box-shadow: 0px 0px 25px 0px rgba(31, 31, 31, 0.25);
+}
+
+.login-page-container__form {
+    width: 548px;
+    height: 90px;
+    border-radius: 20px;
+    border: 3px solid #808080;
+    background: rgba(31, 31, 31, 0.00);
+    color: #808080;
+    font-family: Jost;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 10px;
+}
+
+.login-page-container__button {
+    margin: 27px auto;
+    display: flex;
+    width: 558px;
+    height: 90px;
+    color: #808080;
+    border-radius: 20px;
+    border: 3px solid #808080;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s ease-in-out all;
+}
+
+.login-page-container__button > img {
+    width: 21px;
+    height: 21px;
+    margin-right: 3px;
+}
+
+.login-page-container__button:hover {
+    background: #808080;
+    color: #FFFFFF;
+    box-shadow: 0px 0px 25px 7px rgba(128, 128, 128, 0.25);
+}
+
+#sign-up-button {
+    margin-bottom: 113px;
+}
+
+#title-container {
+    align-content: center;
+}
+
+#login-forms-container {
+    margin: auto;
+    padding-top: 44px;
+}
+
+#login-forms-container > a {
+    color: #808080;
+    margin-bottom: 79px;
+}
+
+#login-page-container__form__email {
+    margin-top: 79px;
+}
+
+#login-page-container__form__password {
+    margin-top: 23px;
+}

@@ -1,0 +1,113 @@
+@font-face {
+    font-family: Jost;
+    src: url(/fonts/Jost-Regular.ttf) format("truetype");
+}
+
+body {
+    background-color: #333333;
+    color: #FFF;
+    margin: 0;
+    height: 100%;
+    font-family: Jost;
+}
+
+.map-panel-container {
+    justify-content: center;
+    display: flex;
+    margin-top: 33px;
+    grid-gap: 27px;
+}
+
+.map-title {
+    width: 560px;
+    height: 70px;
+    font-size: 24px;
+    height: 70px;
+    border-radius: 24px;
+    background: #1F1F1F;
+    box-shadow: 0px 0px 70px 7px rgba(31, 31, 31, 0.25);
+    display: flex;
+    align-items: center;
+    padding-left: 27px;
+    margin-bottom: 17px;
+}
+
+.map-title > img {
+    width: 36px;
+    height: 26px;
+}
+
+.panel__date-sorting {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    grid-gap: 12px;
+    margin-bottom: 19px;
+}
+
+.date-sorting__button {
+    width: 185px;
+    height: 69px;
+    border-radius: 20px;
+    border: 2px solid #808080;
+    background: rgba(31, 31, 31, 0.00);
+    box-shadow: 0px 0px 250px 0px rgba(0, 0, 0, 0.25);
+    color: #808080;
+    text-align: center;
+    align-content: center;
+    font-family: Jost;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    transition: 0.05s ease-in-out all;
+}
+
+.date-sorting__button:active {
+    background: #808080;
+    color: #FFFFFF;
+    box-shadow: 0px 0px 25px 7px rgba(128, 128, 128, 0.25);
+}
+
+.panel__notifications {
+    width: 587px;
+    height: 627px;
+    border-radius: 24px;
+    background: #1F1F1F;
+    box-shadow: 0px 0px 70px 7px rgba(31, 31, 31, 0.25);
+    color: #808080;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-top: 19px;
+    overflow-x: hidden;
+    margin-bottom: 29px;
+}
+
+.panel__notifications__notification {
+    width: 426px;
+    height: 211px;
+    border-radius: 20px;
+    border: 2px solid #808080;
+    background: rgba(31, 31, 31, 0.00);
+    box-shadow: 0px 0px 250px 0px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    margin-left: 19px;
+    margin-bottom: 15px;
+}
+
+.panel__back {
+    width: 587px;
+    height: 96px;
+    border-radius: 24px;
+    background: #1F1F1F;
+    box-shadow: 0px 0px 70px 7px rgba(31, 31, 31, 0.25);
+    color: #FFF;
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    align-content: center;
+}
