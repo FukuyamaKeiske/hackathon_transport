@@ -27,6 +27,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the Traffic Management System API"}
+
 # Подключение маршрутов
 app.include_router(traffic_analysis.router, prefix="/api/v1/traffic-analysis", tags=["Traffic Analysis"])
 app.include_router(incidents.router, prefix="/api/v1/incidents", tags=["Incidents"])

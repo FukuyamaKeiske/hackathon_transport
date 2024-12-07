@@ -2,7 +2,9 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.session import get_db
 from app.services.effectiveness_analysis import analyze_effectiveness, add_effectiveness_measure
-from app.db.models.effectiveness import Effectiveness
+from app.db.schemas.effectiveness import Effectiveness  # Импортируем Pydantic модель
+from pydantic import BaseModel
+from typing import List
 
 router = APIRouter()
 
@@ -12,6 +14,6 @@ async def list_effectiveness(db: AsyncSession = Depends(get_db)):
     return effectiveness_data
 
 @router.post("/", response_model=Effectiveness)
-async def create_effectiveness(measure_data: dict, db: AsyncSession = Depends(get_db)):
-    new_measure = await add_effectiveness_measure(db, measure_data)
+async def create_effectiveness(measure_data: Effectiveness, db: AsyncSession = Depends(get_db)):
+    new_measure = await add_effectiveness_measure(db, measure_data.dict())
     return new_measure

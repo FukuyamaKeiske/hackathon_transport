@@ -1,8 +1,16 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.session import get_db
 from app.services.environmental_impact import get_environmental_data, add_environmental_data
-from app.db.models.environmental_data import EnvironmentalData
+from app.db.schemas.environmental_data import EnvironmentalData  # Импортируем Pydantic модель
+from pydantic import BaseModel
+from typing import List
+
+class EnvironmentalDataRequest(BaseModel):
+    timestamp: str
+    longitude: float
+    latitude: float
+    distance: float  # Расстояние в метрах
 
 router = APIRouter()
 
@@ -12,6 +20,6 @@ async def list_environmental_data(db: AsyncSession = Depends(get_db)):
     return environmental_data
 
 @router.post("/", response_model=EnvironmentalData)
-async def create_environmental_data(data: dict, db: AsyncSession = Depends(get_db)):
-    new_data = await add_environmental_data(db, data)
+async def create_environmental_data(data: EnvironmentalDataRequest, db: AsyncSession = Depends(get_db)):
+    new_data = await add_environmental_data(db, data.dict())
     return new_data

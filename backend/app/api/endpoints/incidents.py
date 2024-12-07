@@ -6,14 +6,14 @@ from app.db.models.incidents import Incident
 
 router = APIRouter()
 
-@router.get("/", response_model=list[Incident])
+@router.get("/", response_model=list[dict])
 async def list_incidents(db: AsyncSession = Depends(get_db)):
     incidents = await get_incidents(db)
-    return incidents
+    return [incident.to_dict() for incident in incidents]  # Используем метод to_dict
 
-@router.get("/{incident_id}", response_model=Incident)
+@router.get("/{incident_id}", response_model=dict)
 async def read_incident(incident_id: str, db: AsyncSession = Depends(get_db)):
     incident = await get_incident_by_id(db, incident_id)
     if incident is None:
         raise HTTPException(status_code=404, detail="Incident not found")
-    return incident
+    return incident.to_dict()  # Используем метод to_dict

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.session import get_db
-from app.services.forecast_service import generate_forecasts, get_forecasts
-from app.db.models.forecasts import Forecast
+from app.services.forecast_service import generate_forecasts
+from app.db.schemas.forecasts import Forecast  # Импортируем Pydantic модель
 from pydantic import BaseModel
 from typing import List, Tuple
 
@@ -25,7 +25,7 @@ async def create_forecasts(
     forecasts = await generate_forecasts(forecast_request.waypoints, forecast_request.mode, forecast_request.departure_time)
     return forecasts
 
-@router.get("/", response_model=list[Forecast])
-async def list_forecasts(db: AsyncSession = Depends(get_db)):
-    forecasts = await get_forecasts(db)
-    return forecasts
+# @router.get("/", response_model=list[Forecast])
+# async def list_forecasts(db: AsyncSession = Depends(get_db)):
+#     forecasts = await get_forecasts(db)
+#     return forecasts
