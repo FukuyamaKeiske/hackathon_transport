@@ -4,6 +4,7 @@ import AuthorizationProvider from "./context/AuthorizationContext"
 import AuthorizationPage from "./pages/AuthorizationPage"
 import PanelPage from "./pages/PanelPage"
 import MapPage from "./pages/MapPage"
+import CamerasPage from "./pages/CamerasPage"
 
 const App: FC = () => {
   
@@ -14,6 +15,7 @@ const App: FC = () => {
             <Route path="/login" element={<AuthorizationPage />}/>
             <Route path="/" element={<PanelPage />}/>
             <Route path="/map" element={<MapPage />}/>
+            <Route path="/cameras/:page" element={<CamerasPage />}/>
         </Routes>
       </AuthorizationProvider>
     </BrowserRouter>

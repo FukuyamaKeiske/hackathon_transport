@@ -37,6 +37,11 @@ body {
     height: 26px;
 }
 
+.map-panel-container__map {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
 .panel__date-sorting {
     justify-content: center;
     align-items: center;

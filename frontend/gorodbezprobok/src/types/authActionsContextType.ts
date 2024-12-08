@@ -1,4 +1,4 @@
 export interface AuthActionsContextType {
-    login: (token: string) => void
-    logout: () => void
+    signUp: (email: string, password: string) => Promise<number>
+    signIn: (email: string, password: string) => Promise<boolean>
 }

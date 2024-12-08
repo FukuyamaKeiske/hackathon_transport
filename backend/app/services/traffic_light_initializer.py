@@ -1,5 +1,4 @@
 import random
-import time
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.models.traffic_lights import TrafficLight
 
@@ -17,15 +16,15 @@ async def initialize_traffic_lights(db: AsyncSession):
         x = random.uniform(x_min, x_max) / 1000000
         y = random.uniform(y_min, y_max) / 1000000
 
-        red_state_duration = random.randint(30, 120)  # Увеличиваем диапазон
-        green_state_duration = random.randint(10, 60)  # Увеличиваем диапазон
+        red_state_duration = random.randint(30, 120)
+        green_state_duration = random.randint(10, 60)
 
         new_light = TrafficLight(
-            location=f"POINT({x} {y})",
-            current_state="red",  # Начальное состояние
+            location=f"SRID=4326;POINT({x} {y})",
+            current_state="red",
             red_state_duration=red_state_duration,
             green_state_duration=green_state_duration,
-            recommended_state="red"  # Начальная рекомендация
+            recommended_state="red"
         )
         db.add(new_light)
     

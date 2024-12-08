@@ -1,8 +1,10 @@
 import { FC } from "react";
-import "../styles/PanelPage.css"
 import { PANEL_BUTTONS, SMALL_BUTTONS } from "../constants";
+
 import ButtonPairs from "../components/ButtonPairs";
 import ButtonPanel from "../components/ButtonPanel";
+
+import "../styles/PanelPage.css"
 
 const PanelPage: FC = () => {
     return (

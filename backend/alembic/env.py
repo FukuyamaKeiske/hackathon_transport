@@ -1,17 +1,27 @@
+import asyncio
 from logging.config import fileConfig
-from sqlalchemy import engine_from_config
 from sqlalchemy import pool
+from sqlalchemy.ext.asyncio import create_async_engine
 from alembic import context
-from app.db.base import Base  # Импортируйте ваш базовый класс
+from app.db.base import Base
 from app.db.models import *  # Импортируйте все ваши модели
+from app.db.models.achievements import Achievement
+from app.db.models.cameras import Camera
+from app.db.models.effectiveness import Effectiveness
+from app.db.models.environmental_data import EnvironmentalData
+from app.db.models.events import Event
+from app.db.models.forecasts import Forecast
+from app.db.models.incidents import Incident
+from app.db.models.notifications import Notification
+from app.db.models.scenarios import Scenario
+from app.db.models.social_reports import SocialReport
+from app.db.models.traffic_data import TrafficData
+from app.db.models.traffic_lights import TrafficLight
+from app.db.models.users import User
 
-# Этот код выполняется, когда Alembic запускается
+# Конфигурация Alembic
 config = context.config
-
-# Настройка логирования
 fileConfig(config.config_file_name)
-
-# Установите метаданные для автоматического создания миграций
 target_metadata = Base.metadata
 
 def run_migrations_offline():
@@ -29,26 +39,25 @@ def run_migrations_offline():
 
 async def run_migrations_online():
     """Run migrations in 'online' mode."""
-    from sqlalchemy.ext.asyncio import create_async_engine
-    from sqlalchemy.ext.asyncio import AsyncSession
-
     connectable = create_async_engine(
         config.get_main_option("sqlalchemy.url"),
         poolclass=pool.NullPool,
     )
 
     async with connectable.connect() as connection:
-        await connection.run_sync(context.configure, target_metadata=target_metadata)
+        await connection.run_sync(run_migrations)
 
-        async with connection.begin():
-            await context.run_migrations()
+def run_migrations(connection):
+    context.configure(connection=connection, target_metadata=target_metadata)
 
-def run_migrations():
+    with context.begin_transaction():
+        context.run_migrations()
+
+def main():
     """Run migrations based on context mode."""
     if context.is_offline_mode():
         run_migrations_offline()
     else:
-        import asyncio
         asyncio.run(run_migrations_online())
 
-run_migrations()
+main()

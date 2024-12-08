@@ -1,7 +1,8 @@
 import L, { Icon } from "leaflet"
-import markerShadow from "leaflet/dist/images/marker-shadow.png"
 import { ButtonType } from "./types/buttonType"
 import { NotificationType } from "./types/notificationType"
+
+import markerShadow from "leaflet/dist/images/marker-shadow.png"
 
 export const RED_MARKER_ICON: Icon = new L.Icon({
     iconUrl: `https://via.placeholder.com/30/FF0000/ffffff?text=+`,
@@ -48,8 +49,9 @@ export const PANEL_BUTTONS: Array<Array<ButtonType>> = [
     [
         {
             title: "Камеры",
-            imagePath: "/public/images/cameras.png",
-            buttonSize: "regular-button"
+            imagePath: "/public/images/camera.png",
+            buttonSize: "regular-button",
+            destination: "/cameras/1"
         },
         {
             title: "Анализ трафика",

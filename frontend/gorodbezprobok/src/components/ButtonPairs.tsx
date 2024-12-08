@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { ButtonPairsProps } from "../props/buttonPairsProps";
+
 import ButtonPanel from "./ButtonPanel";
 
 const ButtonPairs: FC<ButtonPairsProps> = ({pairs}) => {

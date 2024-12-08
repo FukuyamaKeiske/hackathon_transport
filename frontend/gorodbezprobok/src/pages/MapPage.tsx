@@ -2,13 +2,13 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import { FC, useState } from "react";
 import { NOTIFICATIONS } from "../constants";
 import { NotificationType } from "../types/notificationType";
+import { getTimePeriods } from "../utils/utils";
+import { useNavigate } from "react-router-dom";
 
 import Notification from "../components/Notification";
 
 import 'leaflet/dist/leaflet.css';
 import "../styles/MapPage.css"
-import { getTimePeriods } from "../utils/utils";
-import { useNavigate } from "react-router-dom";
 
 const MapPage: FC = () => {
     const [changedNotifications, setChangedNotifications] = useState<Array<NotificationType>>(NOTIFICATIONS);
@@ -48,7 +48,7 @@ const MapPage: FC = () => {
                             )
                         }
                     </div>
-                    <div className="panel__back" onClick={() => navigate(-1)}>
+                    <div className="panel__back" onClick={() => navigate("/")}>
                         НАЗАД
                     </div>
                 </div>
