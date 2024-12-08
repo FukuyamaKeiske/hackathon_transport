@@ -4,16 +4,13 @@ import { CamerasProps } from "../props/camerasProps";
 const CameraComponent: FC<CamerasProps> = ({camerasData}) => {
     const [isFocused, setIsFocused] = useState(false);
 
-    const onFocusHandler = () => {
-        setIsFocused(true);
-    }
-
-    const onBlurHandler = () => {
-        setIsFocused(false);
+    const onClick = () => {
+        if(isFocused) setIsFocused(false)
+        else setIsFocused(true);
     }
 
     return (
-        <div className="panel__cameras__camera" onMouseEnter={onFocusHandler} onMouseLeave={onBlurHandler} tabIndex={0}>
+        <div className="panel__cameras__camera" onClick={onClick} tabIndex={0}>
             <b>{camerasData.name}</b><br/><br/>
             {camerasData.description}<br/>
             {camerasData.geo}

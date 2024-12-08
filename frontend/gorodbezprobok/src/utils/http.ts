@@ -6,6 +6,7 @@ import { Camera } from "../types/api/camera";
 import { Waypoint } from "../types/api/waypoint";
 import { TrafficAnalysis } from "../types/api/trafficAnalysis";
 import { TrafficLight } from "../types/api/trafficLight";
+import { Notification } from "../types/api/notification";
 
 export class Http {
     axios = new Axios({
@@ -68,6 +69,7 @@ export class Http {
     }
 
     async getCameras(page: string): Promise<Array<Camera>> {
+        console.log(await this.axios.get<Array<Camera>>(`/api/v1/cameras/${page}`))
         return (await this.axios.get<Array<Camera>>(`/api/v1/cameras/${page}`)).data
     }
 
@@ -91,7 +93,7 @@ export class Http {
         return response.status
     }
 
-    // async getNotifications(): Promise<number> {
-
-    // }
+    async getNotifications(): Promise<Array<Notification>> {
+        return (await this.axios.get<Array<Notification>>("/api/v1/notifications")).data
+    }
 }

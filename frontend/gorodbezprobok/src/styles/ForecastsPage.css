@@ -1,0 +1,12 @@
+@font-face {
+    font-family: Jost;
+    src: url(/fonts/Jost-Regular.ttf) format("truetype");
+}
+
+body {
+    background-color: #333333;
+    color: #FFF;
+    margin: 0;
+    height: 100%;
+    font-family: Jost;
+}

@@ -1,54 +1,56 @@
-import { MapContainer, TileLayer } from "react-leaflet";
-import { FC, useState } from "react";
-import { NOTIFICATIONS } from "../constants";
-import { NotificationType } from "../types/notificationType";
-
-import Notification from "../components/Notification";
-
-import 'leaflet/dist/leaflet.css';
-import "../styles/TrafficLightsPage.css"
-import { getTimePeriods } from "../utils/utils";
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
-const TrafficLightsPage: FC = () => {
-    const [changedNotifications, setChangedNotifications] = useState<Array<NotificationType>>(NOTIFICATIONS);
-    const navigate = useNavigate()
 
-    const onClickHandler = (event: any) => {
-        let timePeriod = getTimePeriods(new Date()).get(event.currentTarget.id)
-        if(timePeriod === undefined) return
-        setChangedNotifications(NOTIFICATIONS.filter(notification => notification.time >= timePeriod))
-    }
+import 'leaflet/dist/leaflet.css';
+import "../styles/MapPage.css"
+import { Map, TrafficControl, YMaps } from "@pbe/react-yandex-maps";
+import TrafficLightComponent from "../components/TrafficLight";
+import { TrafficLight } from "../types/api/trafficLight";
+
+const TrafficLightsPage: FC = () => {
+    const navigate = useNavigate()
+    const trafficLights: Array<TrafficLight> = [
+        {
+            id: "sddsf",
+            current_state: "sdfdsf",
+            recommendedAction: "sdfsdf"
+        },
+        {
+            id: "sddsf",
+            current_state: "sdfdsf",
+            recommendedAction: "sdfsdf"
+        },
+        {
+            id: "sddsf",
+            current_state: "sdfdsf",
+            recommendedAction: "sdfsdf"
+        },
+    ]
 
     return (
         <>
             <div className="map-panel-container">
                 <div className="map-panel-container__map">
-                    <MapContainer center={[51.505, -0.09]} zoom={13} style={{ width: "1229px", height: "945px"}}>
-                        <TileLayer
-                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                    </MapContainer>
+                <YMaps>
+                    <Map defaultState={{ center: [45.03913263910287,38.976724473573235], zoom: 9 }} style={{ width: "1229px", height: "945px"}}>
+                        <TrafficControl options={{ float: "right" }}/>
+                    </Map>
+                </YMaps>
                 </div>
                 <div className="map-panel-container__panel">
                     <div className="map-title">
                         <img src="/public/images/map.png"/>
                         Карта
                     </div>
-                    <div className="panel__date-sorting">
-                        <button className="date-sorting__button" id="day" onClick={e => onClickHandler(e)}>Сегодня</button>
-                        <button className="date-sorting__button" id="week" onClick={e => onClickHandler(e)}>Неделя</button>
-                        <button className="date-sorting__button" id="month" onClick={e => onClickHandler(e)}>Месяц</button>
-                    </div>
                     <div className="panel__notifications">
                         {
-                            changedNotifications.map(notification =>
-                                <Notification notificationData={notification}/>
+                            trafficLights.map(trafficLight =>
+                                <TrafficLightComponent trafficLightData={trafficLight}/>
                             )
                         }
                     </div>
-                    <div className="panel__back" onClick={() => navigate(-1)}>
+                    <div className="panel__back" onClick={() => navigate("/")}>
                         НАЗАД
                     </div>
                 </div>

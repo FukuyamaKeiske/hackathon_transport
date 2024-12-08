@@ -61,7 +61,7 @@ const CamerasPage: FC = () => {
         <>
             <div className="cameras-panel-container">
                 <div className="cameras-panel-container__map">
-                    <MapContainer center={[51.505, -0.09]} zoom={13} style={{ width: "1229px", height: "945px"}}>
+                    <MapContainer center={[45.03913263910287,38.976724473573235]} zoom={13} style={{ width: "1229px", height: "945px"}}>
                         <TileLayer
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

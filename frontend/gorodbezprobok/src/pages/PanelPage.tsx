@@ -31,7 +31,8 @@ const PanelPage: FC = () => {
                     buttonProperties={{
                         title: "Светофоры",
                         imagePath: "/public/images/traffic_light.png",
-                        buttonSize: "regular-button"
+                        buttonSize: "regular-button",
+                        destination: "/traffic-lights"
                     }}
                 />
                 <div className="pagel-page-container__small-buttons">

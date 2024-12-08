@@ -2,10 +2,12 @@ import { createContext, useEffect, useState, FC, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContextType } from '../types/authContextType';
 import { AuthActionsContextType } from '../types/authActionsContextType';
+import { FunctionalActionsContextType } from '../types/functionalActionsContextType';
 import { Http } from '../utils/http';
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthActionsContext = createContext<AuthActionsContextType | undefined>(undefined)
+export const FunctionalActionsContext = createContext<FunctionalActionsContextType | undefined>(undefined)
 
 const AuthorizationProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
@@ -23,6 +25,18 @@ const AuthorizationProvider: FC<{ children: React.ReactNode }> = ({ children }) 
         return false
     }
 
+    const getNotifications = async () => {
+        return (await http.getNotifications())
+    }
+
+    // const getCameras = async (page: string): Promise<Array<Camera>> => {
+    //     return (await http.getCameras(page))
+    // }
+
+    // const getIncidents = async (): Promise<Array<Incident>> => {
+    //     return (await http.getIncidents())
+    // }
+
     useEffect(() => {
         setIsAuthenticated(true)
         // const token = localStorage.getItem('token');
@@ -38,11 +52,17 @@ const AuthorizationProvider: FC<{ children: React.ReactNode }> = ({ children }) 
         () => ({signIn, signUp}),
         [signIn, signUp]
     )
+    const functionalActions = useMemo(
+        () => ({getNotifications}),
+        [getNotifications]
+    )
 
     return (
         <AuthContext.Provider value={values}>
             <AuthActionsContext.Provider value={actions}>
-                {children}
+                <FunctionalActionsContext.Provider value={functionalActions}>
+                    {children}
+                </FunctionalActionsContext.Provider>
             </AuthActionsContext.Provider>
         </AuthContext.Provider>
     );
